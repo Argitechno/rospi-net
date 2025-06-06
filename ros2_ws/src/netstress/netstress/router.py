@@ -1,4 +1,5 @@
 import rclpy
+from rclpy.parameter import Parameter
 from rclpy.node import Node
 from std_msgs.msg import String
 
@@ -34,6 +35,18 @@ class CountingPublisher:
 class Router(Node):
     def __init__(self):
         super().__init__('router')
+
+        # Declare parameters with default values (empty list)
+        self.declare_parameter('talk_topics', [''])
+        self.declare_parameter('listen_topics', [''])
+
+        # Read parameter values
+        self.talk_topics = self.get_parameter('talk_topics').get_parameter_value().string_array_value
+        self.listen_topics = self.get_parameter('listen_topics').get_parameter_value().string_array_value
+
+        self.get_logger().info(f"Talk topics: {self.talk_topics}")
+        self.get_logger().info(f"Listen topics: {self.listen_topics}")
+        
         self.output = CountingPublisher(self, 'net_test')
         self.input = CountingListener(self, 'net_test')
 

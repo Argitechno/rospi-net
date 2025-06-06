@@ -21,7 +21,8 @@ setup(
     entry_points={
         'console_scripts': [
             'talker = netstress.talker:main',
-            'listener = netstress.listener:main'
+            'listener = netstress.listener:main',
+            'router = netstress.router:main'
         ]
     }
 )
