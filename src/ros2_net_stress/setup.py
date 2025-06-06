@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'talker = ros2_net_stress.talker:main',
+            'listener = ros2_net_stress.listener:main',
         ],
     },
 
