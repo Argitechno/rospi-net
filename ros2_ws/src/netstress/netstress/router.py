@@ -36,19 +36,26 @@ class Router(Node):
     def __init__(self):
         super().__init__('router')
 
-        # Declare parameters with default values (empty list)
+        # Declare parameters with default empty lists
         self.declare_parameter('talk_topics', [''])
         self.declare_parameter('listen_topics', [''])
 
-        # Read parameter values
+        # Get parameter values as string arrays
         self.talk_topics = self.get_parameter('talk_topics').get_parameter_value().string_array_value
         self.listen_topics = self.get_parameter('listen_topics').get_parameter_value().string_array_value
 
         self.get_logger().info(f"Talk topics: {self.talk_topics}")
         self.get_logger().info(f"Listen topics: {self.listen_topics}")
-        
-        self.output = CountingPublisher(self, 'net_test')
-        self.input = CountingListener(self, 'net_test')
+
+        # Create CountingPublisher instances for each talk topic
+        self.counting_publishers = {}
+        for topic in self.talk_topics:
+            self.counting_publishers[topic] = CountingPublisher(self, topic)
+
+        # Create CountingListener instances for each listen topic
+        self.counting_listeners = {}
+        for topic in self.listen_topics:
+            self.counting_listeners[topic] = CountingListener(self, topic)
 
 def main(args=None):
     rclpy.init(args=args)
