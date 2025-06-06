@@ -6,6 +6,7 @@ from std_msgs.msg import String
 class CountingListener:
     def __init__(self, node, topic_name):
         self.node = node
+        self.topic_name = topic_name
         self.count = 0
         self.subscription = node.create_subscription(
             String,
@@ -16,11 +17,12 @@ class CountingListener:
 
     def listener_callback(self, msg):
         self.count += 1
-        self.node.get_logger().info(f"Received: '{msg.data}', total count: {self.count}")
+        self.node.get_logger().info(f"[{self.topic_name}] Received: '{msg.data}', total count: {self.count}")
 
 class CountingPublisher:
     def __init__(self, node, topic_name):
         self.node = node
+        self.topic_name = topic_name
         self.count = 0
         self.publisher = node.create_publisher(String, topic_name, 10)
         self.timer = node.create_timer(0.1, self.publish_msg)
@@ -29,7 +31,7 @@ class CountingPublisher:
         msg = String()
         msg.data = f"Stress message {self.count}"
         self.publisher.publish(msg)
-        self.node.get_logger().info(f"Published: '{msg.data}'")
+        self.node.get_logger().info(f"[{self.topic_name}] Published: '{msg.data}'")
         self.count += 1
 
 class Router(Node):
