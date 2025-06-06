@@ -19,13 +19,9 @@ class StressTalker(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = StressTalker()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        node.get_logger().info("Shutting down from Ctrl+C")
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
