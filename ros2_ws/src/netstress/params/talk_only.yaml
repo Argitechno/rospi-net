@@ -1,4 +1,0 @@
-router:
-  ros__parameters:
-    talk_topics: ["test_topic1", "test_topic2"]
-    listen_topics: []

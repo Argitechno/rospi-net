@@ -1,4 +1,4 @@
 router:
   ros__parameters:
-    publish_topics: []
+    publish_topics: ["test_topic1", "test_topic2"]
     subscribe_topics: []

@@ -1,0 +1,113 @@
+[33mcommit 32bd6790591d76e66266da0adef76aed0c0e765c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdevelop-testing[m[33m)[m
+Author: Caleb Blondell <caleb.blondell@gmail.com>
+Date:   Tue Jun 17 10:04:21 2025 -0700
+
+    test/fix: add yaml parameter testing files for varius use cases and fixed router.py for empty topic lists in yaml
+
+[33mcommit fb3e6c6c0edf5513e2ad0d8c07d028e932b95382[m[33m ([m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m
+Merge: 3fd0ed0 373fe8e
+Author: Caleb Blondell <99220517+Argitechno@users.noreply.github.com>
+Date:   Tue Jun 17 16:42:50 2025 +0000
+
+    Merge pull request #2 from Argitechno/feature/router-node-init
+    
+    Feature/router node init
+
+[33mcommit 373fe8e92b976c5bedc696a882200bce13b98d0d[m[33m ([m[1;31morigin/feature/router-node-init[m[33m, [m[1;32mfeature/router-node-init[m[33m)[m
+Author: Caleb Blondell <caleb.blondell@gmail.com>
+Date:   Tue Jun 17 09:41:48 2025 -0700
+
+    docs: update README for minimal router-only package and usage instructions
+
+[33mcommit f5a6cc811898811502d4e62fdb478fd0ee147c0e[m
+Author: Caleb Blondell <caleb.blondell@gmail.com>
+Date:   Tue Jun 17 09:38:34 2025 -0700
+
+    refactor: remove standalone listener and talker nodes, router is now the only node
+
+[33mcommit 13f95c5584d717c6bb3fd2380283b0d89a0b3299[m
+Author: Caleb Blondell <caleb.blondell@gmail.com>
+Date:   Tue Jun 17 09:00:48 2025 -0700
+
+    fix: declare talk_topics and listen_topics as string array parameters for YAML compatibility
+
+[33mcommit 97dae463f1d2e36d0a741f8094eee48ce91805de[m
+Author: Caleb Blondell <caleb.blondell@gmail.com>
+Date:   Fri Jun 6 15:20:53 2025 -0700
+
+    test: update params to verify multi-topic pub/sub behavior
+
+[33mcommit 76253ed52909812b5c33128400dde2d13e84122e[m
+Author: Caleb Blondell <caleb.blondell@gmail.com>
+Date:   Fri Jun 6 15:15:26 2025 -0700
+
+    feat: multi-topic pub/sub according to params
+
+[33mcommit c521bf917a30bf08b47e7f7a6048619cbacdc357[m
+Author: Caleb Blondell <caleb.blondell@gmail.com>
+Date:   Fri Jun 6 15:02:17 2025 -0700
+
+    feat: add parameter YAML file, update router node to use parameters, make router node runnable
+
+[33mcommit 7d831bf4c53178c4da32ba4cfd3dd874805dc824[m
+Author: Caleb Blondell <caleb.blondell@gmail.com>
+Date:   Fri Jun 6 14:25:56 2025 -0700
+
+    feat: add Router node with CountingPublisher and CountingListener classes to track message counts
+
+[33mcommit 3fd0ed0a5becc33ead0e1da5ba5ecc3c9a59a4b1[m
+Merge: b3f5787 59b51d8
+Author: Caleb Blondell <99220517+Argitechno@users.noreply.github.com>
+Date:   Fri Jun 6 13:19:33 2025 -0700
+
+    Merge pull request #1 from Argitechno/file_restructure
+    
+    refactor: moved ros_ws folders to interior folder to make room for other work…
+
+[33mcommit 59b51d83ab502756f3a5421d400f8cde0c280c47[m[33m ([m[1;31morigin/file_restructure[m[33m, [m[1;32mfile_restructure[m[33m)[m
+Author: Caleb Blondell <caleb.blondell@gmail.com>
+Date:   Fri Jun 6 13:16:21 2025 -0700
+
+    refactor: moved ros_ws folders to interior folder to make room for other work
+
+[33mcommit b3f5787cfcadaea138a8c5426aa3605b6fdbf4c0[m
+Author: Caleb Blondell <caleb.blondell@gmail.com>
+Date:   Fri Jun 6 11:52:24 2025 -0700
+
+    fix: remove uneccesary/broken ctrl+c handling
+
+[33mcommit 8f855697414b671e17f360b1d3b28f4d1bb1204c[m
+Author: Caleb Blondell <caleb.blondell@gmail.com>
+Date:   Thu Jun 5 18:38:47 2025 -0700
+
+    feat: listener node
+
+[33mcommit b5163f93e71a57e4b78c82a312cec8de53252325[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Caleb Blondell <caleb.blondell@gmail.com>
+Date:   Thu Jun 5 17:53:43 2025 -0700
+
+    feat: stress test talker node
+
+[33mcommit 1a3ed72d55c2db530e7c270f41ee713a9b840a35[m
+Author: Caleb Blondell <99220517+Argitechno@users.noreply.github.com>
+Date:   Wed Jun 4 09:50:24 2025 -0700
+
+    Update README.md
+
+[33mcommit 9ff4681e210e0de19cb008e0aa20cb545d045be0[m
+Author: Caleb Blondell <99220517+Argitechno@users.noreply.github.com>
+Date:   Wed Jun 4 09:50:12 2025 -0700
+
+    Update README.md
+
+[33mcommit b5f28b65679ce449b9b49fce6d85d600b68fb514[m
+Author: Caleb Blondell <99220517+Argitechno@users.noreply.github.com>
+Date:   Wed Jun 4 09:49:40 2025 -0700
+
+    Update README.md
+
+[33mcommit 98a0bff442e1547590195cc945f7e6411a9a5300[m
+Author: Caleb Blondell <99220517+Argitechno@users.noreply.github.com>
+Date:   Wed Jun 4 09:17:41 2025 -0700
+
+    Initial commit

@@ -1,4 +1,4 @@
 router:
   ros__parameters:
-    talk_topics: ["shared_topic", "unique_talk"]
-    listen_topics: ["shared_topic", "unique_listen"]
+    publish_topics: ["shared_topic", "unique_talk"]
+    subscribe_topics: ["shared_topic", "unique_listen"]
