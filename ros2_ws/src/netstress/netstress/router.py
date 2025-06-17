@@ -1,5 +1,6 @@
 import rclpy
 from rclpy.parameter import Parameter
+from rcl_interfaces.msg import ParameterDescriptor, ParameterType
 from rclpy.node import Node
 from std_msgs.msg import String
 
@@ -39,15 +40,28 @@ class Router(Node):
         super().__init__('router')
 
         # Declare parameters with default empty lists
-        self.declare_parameter('talk_topics', [''])
-        self.declare_parameter('listen_topics', [''])
+        self.declare_parameter(
+            'talk_topics',
+            value=[''],
+            descriptor=ParameterDescriptor(type=ParameterType.PARAMETER_STRING_ARRAY)
+        )
+        self.declare_parameter(
+            'listen_topics',
+            value=[''],
+            descriptor=ParameterDescriptor(type=ParameterType.PARAMETER_STRING_ARRAY)
+        )
 
         # Get parameter values as string arrays
-        self.talk_topics = self.get_parameter('talk_topics').get_parameter_value().string_array_value
-        self.listen_topics = self.get_parameter('listen_topics').get_parameter_value().string_array_value
+        self.talk_topics = [t for t in self.get_parameter('talk_topics').get_parameter_value().string_array_value if t]
+        self.listen_topics = [t for t in self.get_parameter('listen_topics').get_parameter_value().string_array_value if t]
 
         self.get_logger().info(f"Talk topics: {self.talk_topics}")
         self.get_logger().info(f"Listen topics: {self.listen_topics}")
+
+        if not self.talk_topics:
+            self.get_logger().warn("No valid talk_topics specified.")
+        if not self.listen_topics:
+            self.get_logger().warn("No valid listen_topics specified.")
 
         # Create CountingPublisher instances for each talk topic
         self.counting_publishers = {}

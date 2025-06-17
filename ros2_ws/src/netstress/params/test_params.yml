@@ -1,8 +1,0 @@
-router:
-  ros__parameters:
-    talk_topics:
-      - "net_a"
-      - "net_c"
-    listen_topics:
-      - "net_b"
-      - "net_c"
