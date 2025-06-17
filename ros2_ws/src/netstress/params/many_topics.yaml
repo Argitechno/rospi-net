@@ -1,0 +1,4 @@
+router:
+  ros__parameters:
+    talk_topics: ["t1", "t2", "t3", "t4", "t5"]
+    listen_topics: ["t1", "t2", "t3", "t4", "t5"]

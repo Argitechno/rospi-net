@@ -52,8 +52,8 @@ class Router(Node):
         )
 
         # Get parameter values as string arrays
-        self.talk_topics = [t for t in self.get_parameter('talk_topics').get_parameter_value().string_array_value if t]
-        self.listen_topics = [t for t in self.get_parameter('listen_topics').get_parameter_value().string_array_value if t]
+        self.talk_topics = [t for t in self.get_parameter_or('talk_topics', rclpy.parameter.Parameter('talk_topics', rclpy.Parameter.Type.STRING_ARRAY, [''])).get_parameter_value().string_array_value if t]
+        self.listen_topics = [t for t in self.get_parameter_or('listen_topics', rclpy.parameter.Parameter('listen_topics', rclpy.Parameter.Type.STRING_ARRAY, [''])).get_parameter_value().string_array_value if t]
 
         self.get_logger().info(f"Talk topics: {self.talk_topics}")
         self.get_logger().info(f"Listen topics: {self.listen_topics}")
