@@ -1,0 +1,4 @@
+router:
+  ros__parameters:
+    publish_topics: ["t1", "t2", "t3", "t4", "t5"]
+    subscribe_topics: ["t1", "t2", "t3", "t4", "t5"]

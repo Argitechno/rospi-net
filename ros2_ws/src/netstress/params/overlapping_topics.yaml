@@ -1,0 +1,4 @@
+router:
+  ros__parameters:
+    publish_topics: ["shared_topic", "unique_talk"]
+    subscribe_topics: ["shared_topic", "unique_listen"]

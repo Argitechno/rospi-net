@@ -1,0 +1,4 @@
+router:
+  ros__parameters:
+    publish_topics: []
+    subscribe_topics: []

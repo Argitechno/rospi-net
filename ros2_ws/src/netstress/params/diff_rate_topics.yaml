@@ -1,0 +1,6 @@
+router:
+  ros__parameters:
+    publish_topics: ["t1", "t2", "t3", "t4", "t5"]
+    subscribe_topics: ["t1", "t2", "t3", "t4", "t5"]
+    publish_rates: [1.0, 2.0, 3.0]
+    default_publish_rate: 1.0

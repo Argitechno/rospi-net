@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'ros2_net_stress'
+package_name = 'netstress'
 
 setup(
     name=package_name,
@@ -20,8 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'talker = ros2_net_stress.talker:main',
-        ],
-    },
-
+            'router = netstress.router:main'
+        ]
+    }
 )
