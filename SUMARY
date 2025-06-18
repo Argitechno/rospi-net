@@ -1,0 +1,91 @@
+ROS2 Communication
+    Nodes
+    Topic
+    Message
+    Services
+
+
+The current setup is that each Reaspberry pi can initialize a Router Node.
+This Router Node takes parameters that specifiy topics to publish on and topics to listen to.
+It also takes in parameters for the publish rate of these topics.
+These parameters can be passed either by command line or through a <parameters>.yaml file.
+
+To demonstrate, you can create a configuration file as such:
+    router:
+        ros__parameters:
+            publish_topics: ["shared_topic", "unique_talk"]
+            subscribe_topics: ["shared_topic", "unique_listen"]
+            publish_rates: [0.1, 0.1]
+            default_publish_rate: [1.0]
+
+    The publish rates are given in hertz. If you had multiple publish topics, and less publish rates than publish topics, default_publish_rate will fill in for any subsequent publish_topics. publish rates are matched in order to publish topics.
+
+    The result of running a router node with this file passed in as parameters is a node that publishes on topics 'shared_topic' and 'unique_talk'.
+    The current setup has the publisher log the message it sends with the topic name. Currentlly, each message will increment a counter for every message sent, that is used in the message it sends.
+    The node will also subscribe to topics 'shared_topic' and 'unique_listen'. Run by itself, it will recieve it's own published messages for 'shared_topic'.
+    The subscriber is set to log what messages it recieves, and the total count so far with that topic name.
+
+    [INFO] [1750203321.712640735] [router]: Publish topics: ['shared_topic', 'unique_talk']
+    [INFO] [1750203321.712914779] [router]: Subscribe topics: ['shared_topic', 'unique_listen']
+    [INFO] [1750203321.818914684] [router]: [shared_topic] Published: 'Stress message 0'
+    [INFO] [1750203321.819147075] [router]: [unique_talk] Published: 'Stress message 0'
+    [INFO] [1750203321.819499696] [router]: [shared_topic] Received: 'Stress message 0', total count: 1
+    [INFO] [1750203321.918661820] [router]: [shared_topic] Published: 'Stress message 1'
+    [INFO] [1750203321.922109098] [router]: [unique_talk] Published: 'Stress message 1'
+    [INFO] [1750203321.924646513] [router]: [shared_topic] Received: 'Stress message 1', total count: 2
+    [INFO] [1750203322.014927383] [router]: [shared_topic] Published: 'Stress message 2'
+    [INFO] [1750203322.015578811] [router]: [unique_talk] Published: 'Stress message 2'
+    [INFO] [1750203322.016449179] [router]: [shared_topic] Received: 'Stress message 2', total count: 3
+
+    We can send a message through some other node, or the command line, to unique_listen, in order to demonstrate that the node is listening to the other topic as well.
+
+    ros2 topic pub 'unique_listen' std_msgs/String 'data: This publishes 4 messages at a rate of 4 hz' -r 4 -t 4
+
+    ...
+    [INFO] [1750203817.667588350] [router]: Publish topics: ['shared_topic', 'unique_talk']
+    [INFO] [1750203817.667885624] [router]: Subscribe topics: ['shared_topic', 'unique_listen']
+    [INFO] [1750203817.765026588] [router]: [unique_listen] Received: 'This publishes 4 messages at a rate of 4 hz', total count: 1
+    [INFO] [1750203817.771109969] [router]: [shared_topic] Published: 'Stress message 0'
+    [INFO] [1750203817.771983398] [router]: [unique_talk] Published: 'Stress message 0'
+    [INFO] [1750203817.773001410] [router]: [shared_topic] Received: 'Stress message 0', total count: 1
+    [INFO] [1750203817.874140944] [router]: [shared_topic] Published: 'Stress message 1'
+    [INFO] [1750203817.874585655] [router]: [unique_talk] Published: 'Stress message 1'
+    [INFO] [1750203817.874897026] [router]: [shared_topic] Received: 'Stress message 1', total count: 2
+    [INFO] [1750203817.973476431] [router]: [shared_topic] Published: 'Stress message 2'
+    [INFO] [1750203817.975327364] [router]: [unique_talk] Published: 'Stress message 2'
+    [INFO] [1750203817.977135924] [router]: [shared_topic] Received: 'Stress message 2', total count: 3
+    [INFO] [1750203818.011294414] [router]: [unique_listen] Received: 'This publishes 4 messages at a rate of 4 hz', total count: 2
+    [INFO] [1750203818.074115150] [router]: [shared_topic] Published: 'Stress message 3'
+    [INFO] [1750203818.076981853] [router]: [unique_talk] Published: 'Stress message 3'
+    [INFO] [1750203818.078874048] [router]: [shared_topic] Received: 'Stress message 3', total count: 4
+    [INFO] [1750203818.174285034] [router]: [shared_topic] Published: 'Stress message 4'
+    [INFO] [1750203818.175090065] [router]: [unique_talk] Published: 'Stress message 4'
+    [INFO] [1750203818.175400937] [router]: [shared_topic] Received: 'Stress message 4', total count: 5
+    [INFO] [1750203818.265954704] [router]: [unique_listen] Received: 'This publishes 4 messages at a rate of 4 hz', total count: 3
+    [INFO] [1750203818.270306128] [router]: [shared_topic] Published: 'Stress message 5'
+    [INFO] [1750203818.271050057] [router]: [unique_talk] Published: 'Stress message 5'
+    [INFO] [1750203818.271989561] [router]: [shared_topic] Received: 'Stress message 5', total count: 6
+    [INFO] [1750203818.374259165] [router]: [shared_topic] Published: 'Stress message 6'
+    [INFO] [1750203818.377987736] [router]: [unique_talk] Published: 'Stress message 6'
+    [INFO] [1750203818.380327060] [router]: [shared_topic] Received: 'Stress message 6', total count: 7
+    [INFO] [1750203818.474342773] [router]: [shared_topic] Published: 'Stress message 7'
+    [INFO] [1750203818.475588449] [router]: [unique_talk] Published: 'Stress message 7'
+    [INFO] [1750203818.475892312] [router]: [shared_topic] Received: 'Stress message 7', total count: 8
+    [INFO] [1750203818.509745082] [router]: [unique_listen] Received: 'This publishes 4 messages at a rate of 4 hz', total count: 4
+
+Now, while this may be somewhat useful, would it not be better to be able to define through parameters a custom component/ virtual component?
+    For example:
+        listen to topics 'left_dist_sensor_data', 'right_dist_sensor_data'
+        publish 'object_position' whenever we recieve 'right_dist_sensor_data' and 'left_dist_sensor_data' within a certain timeframe of eachother
+    or listen to none
+        publish 'left_dist_sensor_data' every 10ms, but have the amount vary randomly between -3ms and 10ms (so some distribution around 10ms, with min and max being 7ms and 20ms)
+
+In the future it may also be useful to setup some kind of config for a virtual service.
+    for example:
+        when called with input 1 and input2
+        listen for 'object_position'
+        publish on 'successful_service_call'
+        return message from 'object_position'
+
+How might this be done in a simple and modular way, such that config files are all we need to create custom 'virtual' components?
+Or would these config files need to be basically some sort of python file.
